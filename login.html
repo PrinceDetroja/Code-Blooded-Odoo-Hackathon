@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create Account</title>
+</head>
+<body>
+  <main class="container" role="main">
+    <section class="card">
+      <div class="brand">
+        <div>
+          <h1 id="company-title">Sign Up</h1>
+        </div>
+      </div>
+
+      <form id="signupForm" novalidate>
+        <div class="field">
+            <label for="name">Company Name</label>
+            <input id="name" name="name" type="text" placeholder="Enter Name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="example@company.com" required autocomplete="email" />
+          <div id="emailErr" class="error" style="display:none"></div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Choose a strong password" minlength="6" required />
+          <div class="small">Min 6 characters</div>
+        </div>
+
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <input id="confirm" name="confirm" type="password" placeholder="Re-type password" minlength="6" required />
+          <div id="matchErr" class="error" style="display:none"></div>
+        </div>
+
+        <div class="row" style="justify-content:space-between; align-items:center;">
+          <div class="small">Already have an account? <a href="#">Log in</a></div>
+          <button class="btn" id="submitBtn" type="submit">Create account</button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
