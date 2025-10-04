@@ -10,7 +10,7 @@
   <div class="container">
     <h2>Company Name</h2>
     <h3>Login</h3>
-    <form action="#" method="POST">
+    <form id="signinForm" action="#" method="POST">
 
       <div class="field">
       <label for="email">Email</label>
@@ -22,9 +22,15 @@
       <input type="password" id="password" placeholder="Enter your password" required>
       </div>
 
-      <button type="submit">Login</button>
+      <div class="login">
+      <button class="loginBtn" type="submit">Login</button>
+      </div>
+      
+      <div class="acc">
+      <p>Don't have an account? <a id= "signupLink" href="signup.html">Sign up here</a></p>
+      </div>
+
     </form>
-    <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
   </div>
 <script src="authentication.js"></script>
 </body>
