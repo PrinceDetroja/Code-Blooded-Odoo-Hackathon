@@ -8,18 +8,18 @@ if (signupForm) {
     const confirm = document.getElementById("confirm").value;
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
+    const country = document.getElementById('country').value;
 
     if (password !== confirm) {
       alert("Passwords do not match!");
       return;
     }
-    console.log({password,confirm,name,email});
 
     try {
         const response = await fetch('http://localhost:5500/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password, confirm })
+            body: JSON.stringify({ name, email, password, confirm, country })
         });
 
         const data = await response.json();

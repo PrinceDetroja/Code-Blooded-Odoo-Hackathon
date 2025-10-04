@@ -29,10 +29,10 @@ db.connect(err => {
 
 // Company Signup Route
 app.post('/signup', async (req, res) => {
-    const { name, email, password, confirm} = req.body;
+    const { name, email, password, confirm, country} = req.body;
 
     //Validation
-    if (!name || !email || !password || !confirm) {
+    if (!name || !email || !password || !confirm || !country) {
         return res.status(400).json({ message: 'All fields are required' });
     }
     if (password !== confirm) {
@@ -51,8 +51,8 @@ app.post('/signup', async (req, res) => {
 
         // Insert company into DB
         await db.promise().query(
-            'INSERT INTO Companies (name, email, password) VALUES (?, ?, ? )',
-            [name, email, confirm]
+            'INSERT INTO Companies (name, email, password, country) VALUES (?, ?, ?, ? )',
+            [name, email, confirm, country]
         );
 
         res.status(201).json({ message: 'Company registered successfully' });

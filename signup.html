@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Create Account</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="container" role="main">
@@ -30,7 +29,6 @@
         <div class="field">
           <label for="password">Password</label>
           <input id="password" name="password" type="password" placeholder="Choose a strong password" minlength="6" required />
-          <div class="small">(Min 6 characters)</div>
         </div>
 
         <div class="field">
@@ -38,13 +36,16 @@
           <input id="confirm" name="confirm" type="password" placeholder="Re-type password" minlength="6" required />
           <div id="matchErr" class="error" style="display:none"></div>
         </div>
-
-        <div class="createAcc" >
-          <button class="btn" id="submitBtn" type="submit">Create account</button>
+        
+        <div class="field">
+          <label for="country">Country</label>
+          <input id="country" name="country" type="text" placeholder="Enter country name">
         </div>
 
-        <div class="row"><div class="small">Already have an account? <a href="signin.html">Log in</a></div></div>
-        
+        <div class="row" style="justify-content:space-between; align-items:center;">
+          <div class="small">Already have an account? <a href="signin.html">Log in</a></div>
+          <button class="btn" id="submitBtn" type="submit">Create account</button>
+        </div>
 
       </form>
     </section>
