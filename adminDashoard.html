@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | User Management</title>
+<link rel="stylesheet" href="aDashboard.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <header>
+        <h1>Admin Dashboard</h1>
+        <h2>Manage Employees</h2>
+    </header>
+
+    <div class="action-bar">
+        <div class="search-filter-group">
+            <div class="search-bar">
+                <input type="search" id="searchInput" placeholder="Search by name, email...">
+            </div>
+            <div class="filter-bar">
+                <select id="roleFilter">
+                    <option value="">All Roles</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Employee">Employee</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" id="addUserBtn">+ Add New User</button>
+    </div>
+
+    <div class="user-table-wrapper">
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th>Reports To</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Users dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="userModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Add New User</h3>
+            <span class="close-button">&times;</span>
+        </div>
+        <form class="modal-body">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <div class="role-options">
+                    <label><input type="radio" name="role" value="Employee" checked> Employee</label>
+                    <label><input type="radio" name="role" value="Manager"> Manager</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="reportsTo">Reports To</label>
+                <select id="reportsTo">
+                    <option>Select Manager...</option>
+                </select>
+            </div>
+        </form>
+        <div class="modal-footer">
+            <button class="btn btn-secondary close-button-footer">Cancel</button>
+            <button class="btn btn-primary" id="saveUserBtn">Save</button>
+        </div>
+    </div>
+</div>
+
+<script src="aDashboard.js"></script>
+</body>
+</html>
