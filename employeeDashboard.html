@@ -21,7 +21,43 @@
     <!-- Dashboard Section -->
     <section id="dashboard" class="section active">
       <h1>Welcome to Employee Dashboard</h1>
-      <p>Select an option from the navigation bar to submit an expense or view history.</p>
+
+      <div class="stats-cards">
+        <div class="card">
+          <h3>Total Expenses</h3>
+          <p id="totalExpenses">$0</p>
+        </div>
+        <div class="card">
+          <h3>Pending Requests</h3>
+          <p id="pendingRequests">0</p>
+        </div>
+        <div class="card">
+          <h3>Approved Requests</h3>
+          <p id="approvedRequests">0</p>
+        </div>
+        <div class="card">
+          <h3>Rejected Requests</h3>
+          <p id="rejectedRequests">0</p>
+        </div>
+      </div>
+
+      <h2>Recent Expenses</h2>
+      <table id="recentExpensesTable">
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Recent expenses dynamically filled here -->
+        </tbody>
+      </table>
+
     </section>
 
     <!-- Submit Expense Section -->
@@ -72,7 +108,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Expense history rows will go here dynamically -->
+          <!-- Expense history rows dynamically generated -->
         </tbody>
       </table>
     </section>

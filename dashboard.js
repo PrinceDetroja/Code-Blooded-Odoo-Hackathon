@@ -1,33 +1,61 @@
-// Navigation toggle
-function showSection(sectionId) {
-  const sections = document.querySelectorAll(".section");
-  sections.forEach(section => section.classList.remove("active"));
-  document.getElementById(sectionId).classList.add("active");
+const sections = document.querySelectorAll('.section');
+function showSection(id){
+    sections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 }
 
-// Expense form submission
-const expenseForm = document.getElementById("expenseForm");
-const historyTable = document.getElementById("historyTable").querySelector("tbody");
+// Sample data
+let expenses = [
+    {amount: 100, currency:"USD", category:"Travel", description:"Taxi fare", date:"2025-10-01", status:"Pending"},
+    {amount: 50, currency:"USD", category:"Food", description:"Lunch", date:"2025-10-02", status:"Approved"},
+    {amount: 200, currency:"USD", category:"Accommodation", description:"Hotel stay", date:"2025-10-03", status:"Rejected"},
+    {amount: 75, currency:"USD", category:"Food", description:"Dinner", date:"2025-10-04", status:"Pending"}
+];
 
-expenseForm.addEventListener("submit", function(e) {
-  e.preventDefault();
+// Update dashboard stats
+function updateDashboard(){
+    const total = expenses.reduce((sum,e)=>sum+e.amount,0);
+    const pending = expenses.filter(e=>e.status==="Pending").length;
+    const approved = expenses.filter(e=>e.status==="Approved").length;
+    const rejected = expenses.filter(e=>e.status==="Rejected").length;
 
-  const amount = document.getElementById("amount").value;
-  const currency = document.getElementById("currency").value;
-  const category = document.getElementById("category").value;
-  const description = document.getElementById("description").value;
-  const date = document.getElementById("date").value;
+    document.getElementById("totalExpenses").innerText="$"+total;
+    document.getElementById("pendingRequests").innerText=pending;
+    document.getElementById("approvedRequests").innerText=approved;
+    document.getElementById("rejectedRequests").innerText=rejected;
 
-  const row = historyTable.insertRow();
-  row.insertCell(0).innerText = amount;
-  row.insertCell(1).innerText = currency;
-  row.insertCell(2).innerText = category;
-  row.insertCell(3).innerText = description;
-  row.insertCell(4).innerText = date;
-  row.insertCell(5).innerText = "Pending";
+    const recentBody = document.querySelector("#recentExpensesTable tbody");
+    recentBody.innerHTML="";
+    expenses.slice(-5).reverse().forEach(e=>{
+        const row = document.createElement("tr");
+        row.innerHTML=`
+            <td>${e.amount}</td>
+            <td>${e.currency}</td>
+            <td>${e.category}</td>
+            <td>${e.description}</td>
+            <td>${e.date}</td>
+            <td>${e.status}</td>
+        `;
+        recentBody.appendChild(row);
+    });
+}
 
-  expenseForm.reset();
-
-  // Automatically switch to history section after submission
-  showSection("history");
+// Submit expense form
+document.getElementById("expenseForm").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const newExpense = {
+        amount: Number(document.getElementById("amount").value),
+        currency: document.getElementById("currency").value,
+        category: document.getElementById("category").value,
+        description: document.getElementById("description").value,
+        date: document.getElementById("date").value,
+        status: "Pending"
+    };
+    expenses.push(newExpense);
+    updateDashboard();
+    alert("Expense claim submitted!");
+    e.target.reset();
 });
+
+// Initialize dashboard
+updateDashboard();

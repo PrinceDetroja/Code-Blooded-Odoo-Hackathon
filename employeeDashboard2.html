@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Dashboard</title>
+  <style>
+    /* Basic Styling for Demonstration (can be moved to dashboard.css) */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+    nav {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      display: block;
+    }
+    nav ul li a:hover {
+      background-color: #555;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .section {
+      display: none; /* Hide all sections by default */
+    }
+    .section.active {
+      display: block; /* Show the active section */
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    form label {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    form input, form select, form textarea, form button {
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    form button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 2rem;
+    }
+    form button:hover {
+      background-color: #218838;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 0.8rem;
+      text-align: left;
+    }
+    table th {
+      background-color: #f2f2f2;
+    }
+
+    /* --- NEW STYLES FOR STATUS --- */
+    .status {
+        padding: 5px 12px;
+        border-radius: 15px;
+        color: white;
+        font-size: 0.8em;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        display: inline-block;
+    }
+    .status-approved {
+        background-color: #28a745; /* Green */
+    }
+    .status-pending {
+        background-color: #ffc107; /* Yellow */
+        color: #333; /* Darker text for yellow background */
+    }
+    .status-rejected {
+        background-color: #dc3545; /* Red */
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+      <li><a href="#" onclick="showSection('submitExpense')">Submit Expense</a></li>
+      <li><a href="#" onclick="showSection('history')">Expense History</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <section id="dashboard" class="section active">
+      <h1>Welcome to Employee Dashboard</h1>
+      <p>Select an option from the navigation bar to submit an expense or view history.</p>
+    </section>
+
+    <section id="submitExpense" class="section">
+      <h2>Submit Expense Claim</h2>
+      <form id="expenseForm">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" placeholder="Enter amount" required>
+
+        <label for="currency">Currency</label>
+        <select id="currency" required>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="INR">INR</option>
+          <option value="GBP">GBP</option>
+        </select>
+
+        <label for="category">Category</label>
+        <select id="category" required>
+          <option value="Travel">Travel</option>
+          <option value="Food">Food</option>
+          <option value="Accommodation">Accommodation</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Enter description" required></textarea>
+
+        <label for="date">Date</label>
+        <input type="date" id="date" required>
+
+        <button type="submit">Submit Claim</button>
+      </form>
+    </section>
+
+    <section id="history" class="section">
+      <h2>Expense History</h2>
+      <table id="historyTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025-10-02</td>
+            <td>Food</td>
+            <td>Team lunch meeting</td>
+            <td>4,500 INR</td>
+            <td><span class="status status-pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>2025-09-20</td>
+            <td>Travel</td>
+            <td>Flight to Delhi for client meeting</td>
+            <td>150.00 USD</td>
+            <td><span class="status status-approved">Approved</span></td>
+          </tr>
+           <tr>
+            <td>2025-09-15</td>
+            <td>Accommodation</td>
+            <td>Hotel stay for conference</td>
+            <td>250.00 EUR</td>
+            <td><span class="status status-approved">Approved</span></td>
+          </tr>
+          <tr>
+            <td>2025-09-12</td>
+            <td>Other</td>
+            <td>Office supplies (Not covered by policy)</td>
+            <td>75.00 GBP</td>
+            <td><span class="status status-rejected">Rejected</span></td>
+          </tr>
+          </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <script>
+    // Simple JavaScript to switch between sections
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      // Show the selected section
+      document.getElementById(sectionId).classList.add('active');
+    }
+  </script>
+</body>
+</html>
